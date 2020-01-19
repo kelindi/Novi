@@ -11,7 +11,9 @@ type Props = {
 
 class Chat extends React.Component<Props> {
   static navigationOptions = ({ navigation }) => ({
-    title: (navigation.state.params || {}).name || 'Chat!',
+    title: 'Novi',
+    headerTintColor: 'black',
+    headerTextColor: 'white',
   });
 
   state = {
@@ -33,6 +35,7 @@ class Chat extends React.Component<Props> {
               user={this.user}
             />
     );
+    
     if (Platform.OS === 'android') {
       return (
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding"  keyboardVerticalOffset={80} enabled>
@@ -45,7 +48,7 @@ class Chat extends React.Component<Props> {
       </SafeAreaView>)
     } 
   }
-
+  
   componentDidMount() {
     Fire.shared.on(message =>
       this.setState(previousState => ({

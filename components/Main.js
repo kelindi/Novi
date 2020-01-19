@@ -6,10 +6,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { AuthSession } from 'expo';
+import { getAutoFocusEnabled } from 'expo/build/AR';
 
 class Main extends React.Component {
   static navigationOptions = {
-    title: 'Chat',
+    header: null,
   };
 
   state = {
@@ -23,16 +25,16 @@ class Main extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text style={styles.title}>Enter your name:</Text>
+      <View style={styles.center}>
+        <Text style={styles.title}>ENTER YOUR NAME:</Text>
         <TextInput
           style={styles.nameInput}
-          placeHolder="John Cena"
+          placeHolder="Username"
           onChangeText={this.onChangeText}
           value={this.state.name}
         />
         <TouchableOpacity onPress={this.onPress}>
-          <Text style={styles.buttonText}>Next</Text>
+            <Text style={styles.buttonText}>Go</Text>
         </TouchableOpacity>
       </View>
     );
@@ -42,22 +44,42 @@ class Main extends React.Component {
 const offset = 24;
 const styles = StyleSheet.create({
   title: {
+    flexDirection:'row',
     marginTop: offset,
-    marginLeft: offset,
-    fontSize: offset,
+    fontSize: 25,
+    justifyContent:'center',
+    alignItems: 'center',
   },
   nameInput: {
     height: offset * 2,
-
     margin: offset,
     paddingHorizontal: offset,
     borderColor: '#111111',
     borderWidth: 1,
+    width: offset * 12,
+    borderWidth: 2,
+    borderRadius:10,
+    fontSize:20,
+    
   },
   buttonText: {
-    marginLeft: offset,
-    fontSize: offset,
+    flexDirection:'row',
+    marginTop: offset,
+    fontSize: 25,
+    justifyContent:'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    paddingHorizontal:10,
+    paddingVertical: 5,
+    borderRadius:10,
+    backgroundColor: '#48BD78',
   },
+  center: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  
 });
 
 export default Main;
