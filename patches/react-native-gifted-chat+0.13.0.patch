@@ -1,0 +1,57 @@
+diff --git a/node_modules/react-native-gifted-chat/lib/Bubble.js b/node_modules/react-native-gifted-chat/lib/Bubble.js
+index d7c4e73..e337aa6 100644
+--- a/node_modules/react-native-gifted-chat/lib/Bubble.js
++++ b/node_modules/react-native-gifted-chat/lib/Bubble.js
+@@ -76,6 +76,10 @@ const styles = {
+             flexDirection: 'row',
+             marginHorizontal: 10,
+         },
++        mood:{
++            backgroundColor:'yellow',
++            height:5,
++        },
+     }),
+ };
+ const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel'];
+@@ -234,6 +238,9 @@ export default class Bubble extends React.Component {
+         }
+         return null;
+     }
++    renderMood(){
++        return <Text style ={styles.content.mood}></Text>;
++    }
+     renderBubbleContent() {
+         return this.props.isCustomViewBottom ? (<View>
+         {this.renderMessageImage()}
+@@ -262,6 +269,7 @@ export default class Bubble extends React.Component {
+           <TouchableWithoutFeedback onLongPress={this.onLongPress} accessibilityTraits='text' {...this.props.touchableProps}>
+             <View>
+               {this.renderBubbleContent()}
++              {this.renderMood()} 
+               <View style={[
+             styles[position].bottom,
+             bottomContainerStyle && bottomContainerStyle[position],
+@@ -281,6 +289,7 @@ Bubble.contextTypes = {
+     actionSheet: PropTypes.func,
+ };
+ Bubble.defaultProps = {
++
+     touchableProps: {},
+     onLongPress: null,
+     renderMessageImage: null,
+@@ -298,6 +307,7 @@ Bubble.defaultProps = {
+         text: null,
+         createdAt: null,
+         image: null,
++        mood: null,
+     },
+     nextMessage: {},
+     previousMessage: {},
+@@ -351,5 +361,6 @@ Bubble.propTypes = {
+         left: ViewPropTypes.style,
+         right: ViewPropTypes.style,
+     }),
++    
+ };
+ //# sourceMappingURL=Bubble.js.map
+\ No newline at end of file
