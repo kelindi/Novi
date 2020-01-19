@@ -9,14 +9,14 @@ class Fire {
   init = () => {
     if (!firebase.apps.length) {
         firebase.initializeApp({
-            apiKey: "AIzaSyATuudGX4Qc-KEz792-6sSD9FUAvgYSZ7A",
-            authDomain: "uofthacks-4a4ba.firebaseapp.com",
-            databaseURL: "https://uofthacks-4a4ba.firebaseio.com",
-            projectId: "uofthacks-4a4ba",
-            storageBucket: "uofthacks-4a4ba.appspot.com",
-            messagingSenderId: "244500316018",
-            appId: "1:244500316018:web:0f00349257d58f6310e7eb",
-            measurementId: "G-B6NCZ6VVLN"
+            apiKey: "",
+            authDomain: "",
+            databaseURL: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: "",
       });
     }
   }
