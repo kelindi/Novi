@@ -1,3 +1,4 @@
+(/images/icon.jpg)
 ## Inspiration
 Since the arrival of text messaging into the modern day world, users have had a love hate relationship with this novel form of communication. Instant contact with those you love at the cost of losing an entire facet of conversation - emotion. However, one group of individuals has been affected by this more than most. For those with autism, who already have a difficult time navigating emotional cues in person, the world of text messages is an even more challenging situation. That's where NOVI comes in. 
 
