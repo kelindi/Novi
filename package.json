@@ -9,10 +9,13 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@google-cloud/storage": "^4.2.0",
     "@react-native-community/masked-view": "^0.1.6",
     "expo": "~36.0.0",
     "firebase": "^7.7.0",
     "moment": "^2.24.0",
+    "node-nlp": "^4.0.2",
+    "node-nlp-rn": "^3.5.2",
     "patch-package": "^6.2.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -26,7 +29,8 @@
     "react-native-video": "^5.0.2",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.0.10",
-    "react-navigation-stack": "^2.0.15"
+    "react-navigation-stack": "^2.0.15",
+    "wink-sentiment": "^5.0.2"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.0.0",

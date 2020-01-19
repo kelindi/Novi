@@ -1,37 +1,77 @@
 diff --git a/node_modules/react-native-gifted-chat/lib/Bubble.js b/node_modules/react-native-gifted-chat/lib/Bubble.js
-index d7c4e73..e337aa6 100644
+index d7c4e73..1ccb993 100644
 --- a/node_modules/react-native-gifted-chat/lib/Bubble.js
 +++ b/node_modules/react-native-gifted-chat/lib/Bubble.js
-@@ -76,6 +76,10 @@ const styles = {
+@@ -8,6 +8,7 @@ import MessageVideo from './MessageVideo';
+ import Time from './Time';
+ import Color from './Color';
+ import { isSameUser, isSameDay } from './utils';
++var sentiment = require( 'wink-sentiment' );
+ const styles = {
+     left: StyleSheet.create({
+         container: {
+@@ -76,6 +77,18 @@ const styles = {
              flexDirection: 'row',
              marginHorizontal: 10,
          },
-+        mood:{
-+            backgroundColor:'yellow',
++        neutral:{
++            backgroundColor:'black',
++            height:5,
++        },
++        positive:{
++            backgroundColor:'green',
++            height:5,
++        },
++        negative:{
++            backgroundColor:'red',
 +            height:5,
 +        },
      }),
  };
  const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel'];
-@@ -234,6 +238,9 @@ export default class Bubble extends React.Component {
+@@ -234,6 +247,20 @@ export default class Bubble extends React.Component {
          }
          return null;
      }
-+    renderMood(){
-+        return <Text style ={styles.content.mood}></Text>;
++    renderMood(score){
++        console.log(score);
++        console.log('mood');
++        if(score > 1){
++            return <Text style ={styles.content.positive}></Text>;
++        }
++        else if(score < -1){
++            return<Text style ={styles.content.negative}></Text>;
++        }
++        else{
++            return <Text style ={styles.content.neutral}></Text>;
++        }
++        
 +    }
      renderBubbleContent() {
          return this.props.isCustomViewBottom ? (<View>
          {this.renderMessageImage()}
-@@ -262,6 +269,7 @@ export default class Bubble extends React.Component {
+@@ -248,7 +275,11 @@ export default class Bubble extends React.Component {
+       </View>);
+     }
+     render() {
+-        const { position, containerStyle, wrapperStyle, bottomContainerStyle, } = this.props;
++        const { currentMessage, position, containerStyle, wrapperStyle, bottomContainerStyle, } = this.props;
++        score = 0.0;
++        if(currentMessage !== null && currentMessage.text !== null ){
++            score = sentiment(currentMessage.text)['normalizedScore'];
++        }
+         return (<View style={[
+             styles[position].container,
+             containerStyle && containerStyle[position],
+@@ -262,6 +293,7 @@ export default class Bubble extends React.Component {
            <TouchableWithoutFeedback onLongPress={this.onLongPress} accessibilityTraits='text' {...this.props.touchableProps}>
              <View>
                {this.renderBubbleContent()}
-+              {this.renderMood()} 
++              {this.renderMood(score)} 
                <View style={[
              styles[position].bottom,
              bottomContainerStyle && bottomContainerStyle[position],
-@@ -281,6 +289,7 @@ Bubble.contextTypes = {
+@@ -281,6 +313,7 @@ Bubble.contextTypes = {
      actionSheet: PropTypes.func,
  };
  Bubble.defaultProps = {
@@ -39,7 +79,7 @@ index d7c4e73..e337aa6 100644
      touchableProps: {},
      onLongPress: null,
      renderMessageImage: null,
-@@ -298,6 +307,7 @@ Bubble.defaultProps = {
+@@ -298,6 +331,7 @@ Bubble.defaultProps = {
          text: null,
          createdAt: null,
          image: null,
@@ -47,7 +87,7 @@ index d7c4e73..e337aa6 100644
      },
      nextMessage: {},
      previousMessage: {},
-@@ -351,5 +361,6 @@ Bubble.propTypes = {
+@@ -351,5 +385,6 @@ Bubble.propTypes = {
          left: ViewPropTypes.style,
          right: ViewPropTypes.style,
      }),
@@ -55,3 +95,23 @@ index d7c4e73..e337aa6 100644
  };
  //# sourceMappingURL=Bubble.js.map
 \ No newline at end of file
+diff --git a/node_modules/react-native-gifted-chat/lib/Message.js b/node_modules/react-native-gifted-chat/lib/Message.js
+index 53653fb..6f23910 100644
+--- a/node_modules/react-native-gifted-chat/lib/Message.js
++++ b/node_modules/react-native-gifted-chat/lib/Message.js
+@@ -6,6 +6,7 @@ import Bubble from './Bubble';
+ import SystemMessage from './SystemMessage';
+ import Day from './Day';
+ import { isSameUser } from './utils';
++var sentiment = require( 'wink-sentiment' );
+ const styles = {
+     left: StyleSheet.create({
+         container: {
+@@ -36,6 +37,7 @@ export default class Message extends React.Component {
+         const shouldUpdate = (this.props.shouldUpdateMessage &&
+             this.props.shouldUpdateMessage(this.props, nextProps)) ||
+             false;
++
+         return (next.sent !== current.sent ||
+             next.received !== current.received ||
+             next.pending !== current.pending ||

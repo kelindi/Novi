@@ -8,6 +8,7 @@ import { createAppContainer } from 'react-navigation';
 const navigator = createStackNavigator({
   Main: { screen: Main },
   Chat: { screen: Chat },
+  
 });
 // Export it as the root component
 const NavContainer = createAppContainer(navigator);

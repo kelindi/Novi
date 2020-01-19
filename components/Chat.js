@@ -12,8 +12,10 @@ type Props = {
 class Chat extends React.Component<Props> {
   static navigationOptions = ({ navigation }) => ({
     title: 'Novi',
+    backgroundColor: 'black',
     headerTintColor: 'black',
     headerTextColor: 'white',
+    
   });
 
   state = {
@@ -48,7 +50,7 @@ class Chat extends React.Component<Props> {
       </SafeAreaView>)
     } 
   }
-
+  
   componentDidMount() {
     Fire.shared.on(message =>
       this.setState(previousState => ({
