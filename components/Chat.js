@@ -48,7 +48,7 @@ class Chat extends React.Component<Props> {
       </SafeAreaView>)
     } 
   }
-  
+
   componentDidMount() {
     Fire.shared.on(message =>
       this.setState(previousState => ({
